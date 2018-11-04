@@ -135,7 +135,7 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
 				acc1, acc6 = accuracy(outputs, labels, topk=(1, 2))
 				acc1_list.append(acc1)
 				acc6_list.append(acc6)
-				it not SHOW_BAR:
+				if not SHOW_BAR:
 					print('epoch {} [{}]: {}/{}'.format(epoch, phase, i_batch, num_batch[phase]))
 					#print('preds: ', preds)
 					#print('labels:', labels.data)
