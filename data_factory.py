@@ -72,6 +72,7 @@ def dataset_info(image_datasets):
 		print('{0} size: {1}'.format(p, dataset_sizes[p]))
 
 	class_names = image_datasets['train'].classes
+	print('num_classes:', len(class_names))
 	print('classes:', class_names)
 
 	return dataset_sizes, class_names

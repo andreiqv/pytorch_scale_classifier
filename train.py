@@ -31,10 +31,10 @@ data_dir = settings.data_dir
 #data_dir = '/w/WORK/ineru/06_scales/_dataset/splited/'
 
 dataloaders, image_datasets = data_factory.load_data(data_dir)
-data_parts = list(dataloaders.keys())
+#data_parts = list(dataloaders.keys())
 dataset_sizes, class_names = data_factory.dataset_info(image_datasets)
-
 num_classes = len(class_names)
+data_parts = ['train', 'valid']
 
 #print(data_parts)
 #print('train size:', dataset_sizes['train'])
