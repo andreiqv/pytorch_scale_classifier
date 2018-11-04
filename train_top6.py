@@ -138,7 +138,7 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
 				print('match: ', int(torch.sum(preds == labels.data)))
 
 				acc1, acc6 = accuracy(outputs, labels, topk=(1, 2))
-				print('top1={:.4f}, top6={}'acc1.double(), acc6.double())
+				print('top1={:.4f}, top6={}'.format(acc1.double(), acc6.double()))
 				acc1_list.append(acc1)
 				acc6_list.append(acc6)
 
