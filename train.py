@@ -75,6 +75,7 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
 				inputs = inputs.to(device)
 				labels = labels.to(device)
 
+				os.system("printf '\033c'")	
 				print(i)
 				i += 1
 
