@@ -44,9 +44,10 @@ def copy_files_to_subdirs(src_dir, dst_dir, parts, ratio=[9,1,0]):
 		files['train'] = file_names[ : num_train]
 		files['valid'] = file_names[num_train : num_train + num_valid]
 		files['test']  = file_names[num_train + num_valid : ]
-		print(num_files, num_train, num_valid, num_test)
-		print('train:valid:test = ', len(files['train']),\
-			len(files['valid']), len(files['test']))
+		print('[{0}] - {1} - {}:{}:{}'.\
+			format(class_name, num_files, num_train, num_valid, num_test))
+		#print('train:valid:test = ', len(files['train']),\
+		#	len(files['valid']), len(files['test']))
 
 		for part in parts:
 			cmd = 'mkdir -p {}'.format(dst_dir + '/' + part + '/' + class_name)
