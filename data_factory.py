@@ -56,8 +56,8 @@ def load_data(data_dir):
 	image_datasets = {p: ImageFolder(os.path.join(data_dir, p),
 		data_transforms[p]) for p in data_parts}	
 
-	dataloaders = {p: DataLoader(image_datasets[p], batch_size=4,
-		shuffle=True, num_workers=4) for p in data_parts}
+	dataloaders = {p: DataLoader(image_datasets[p], batch_size=32,
+		shuffle=True, num_workers=8) for p in data_parts}
 
 	return dataloaders, image_datasets
 
