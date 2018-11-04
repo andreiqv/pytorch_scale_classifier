@@ -22,7 +22,10 @@ import time
 import os
 import copy
 
-import torchsample as ts
+#import torchsample as ts
+
+import settings
+
 
 def load_data(data_dir):
 		
@@ -89,7 +92,7 @@ def imshow(inp, title=None):
 
 if __name__ == '__main__':
 
-	data_dir = '/w/WORK/ineru/06_scales/_dataset/splited/'
+	data_dir = settings.data_dir #'/w/WORK/ineru/06_scales/_dataset/splited/'
 	dataloaders, image_datasets = load_data(data_dir)
 	dataset_sizes, class_names = dataset_info(image_datasets)
 

@@ -24,9 +24,12 @@ import sys
 import copy
 
 import data_factory
+import settings
+data_dir = settings.data_dir 
 
 #root = '/home/andrei/Data/Datasets/Scales/classifier_dataset_181018/'
-data_dir = '/w/WORK/ineru/06_scales/_dataset/splited/'
+#data_dir = '/w/WORK/ineru/06_scales/_dataset/splited/'
+
 dataloaders, image_datasets = data_factory.load_data(data_dir)
 data_parts = list(dataloaders.keys())
 dataset_sizes, class_names = data_factory.dataset_info(image_datasets)
