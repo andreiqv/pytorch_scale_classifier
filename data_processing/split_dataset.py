@@ -35,7 +35,7 @@ def copy_files_to_subdirs(src_dir, dst_dir, parts, ratio=[9,1,0]):
 		num_valid = num_files * ratio[1] // sum(ratio)
 		num_test  = num_files * ratio[2] // sum(ratio)
 		num_train = num_files - num_valid - num_test
-		min_num_train = 5
+		min_num_train = 10
 		if num_train < min_num_train:
 			(num_train, num_valid, num_test) = (num_files, 0, 0)
 
