@@ -3,6 +3,9 @@
 """
 First run split_dataset.py to split dataset in train|valid|test parts.
 Then run this script.
+
+train loss=2.6459, acc=0.3861, top1=0.3861, top6=0.4985
+valid loss=1.4961, acc=0.5917, top1=0.5847, top6=0.7120
 """
 
 from __future__ import print_function, division
@@ -81,6 +84,7 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
 	best_acc = 0.0
 
 	for epoch in range(num_epochs):
+		print('------------')
 		print('Epoch {}/{}'.format(epoch, num_epochs - 1))
 		print('-' * 10)
 
@@ -129,12 +133,12 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
 
 				# statistics
 				print('epoch {} [{}]: {}/{}'.format(epoch, phase, i_batch, num_batch[phase]))
-				print('preds: ', preds)
-				print('labels:', labels.data)
+				#print('preds: ', preds)
+				#print('labels:', labels.data)
 				print('match: ', int(torch.sum(preds == labels.data)))
 
 				acc1, acc6 = accuracy(outputs, labels, topk=(1, 2))
-				print(acc1, acc6)
+				print('top1={:.4f}, top6={}'acc1.double(), acc6.double())
 				acc1_list.append(acc1)
 				acc6_list.append(acc6)
 
@@ -148,8 +152,8 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
 			epoch_acc1 = np.mean(acc1_list)
 			epoch_acc6 = np.mean(acc6_list)
 
-			print('{} loss={:.4f}, acc={:.4f}, top1={:.4f}, top6={:.4f}' .
-				format(phase, epoch_loss, epoch_acc, epoch_acc1, epoch_acc6))
+			print('Epoch {} [{}]: loss={:.4f}, acc={:.4f}, top1={:.4f}, top6={:.4f}' .
+				format(epoch, phase, epoch_loss, epoch_acc, epoch_acc1, epoch_acc6))
 
 			# deep copy the model
 			if phase == 'valid' and epoch_acc > best_acc:
