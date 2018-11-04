@@ -128,6 +128,7 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
 
 
 				# statistics
+				print('epoch {}: {}/{}'.format(epoch, i_batch, num_batch[phase]))
 				print('preds: ', preds)
 				print('labels:', labels.data)
 				print('match: ', int(torch.sum(preds == labels.data)))
