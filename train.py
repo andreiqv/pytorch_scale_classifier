@@ -68,10 +68,15 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
 			running_loss = 0.0
 			running_corrects = 0
 
+			i = 0
+
 			# Iterate over data.
 			for inputs, labels in dataloaders[phase]:
 				inputs = inputs.to(device)
 				labels = labels.to(device)
+
+				print(i)
+				i += 1
 
 				# zero the parameter gradients
 				optimizer.zero_grad()
