@@ -28,7 +28,7 @@ import sys
 import copy
 
 import progressbar
-SHOW_BAR = False
+SHOW_BAR = True
 
 import data_factory
 import settings
@@ -132,15 +132,16 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
 
 
 				# statistics
-				print('epoch {} [{}]: {}/{}'.format(epoch, phase, i_batch, num_batch[phase]))
-				#print('preds: ', preds)
-				#print('labels:', labels.data)
-				print('match: ', int(torch.sum(preds == labels.data)))
-
 				acc1, acc6 = accuracy(outputs, labels, topk=(1, 2))
-				print('top1={:.4f}, top6={:.4f}'.format(acc1.double(), acc6.double()))
 				acc1_list.append(acc1)
 				acc6_list.append(acc6)
+				it not SHOW_BAR:
+					print('epoch {} [{}]: {}/{}'.format(epoch, phase, i_batch, num_batch[phase]))
+					#print('preds: ', preds)
+					#print('labels:', labels.data)
+					print('match: ', int(torch.sum(preds == labels.data)))
+					print('top1={:.4f}, top6={:.4f}'.format(acc1.double(), acc6.double()))
+
 
 				running_loss += loss.item() * inputs.size(0)
 				running_corrects += torch.sum(preds == labels.data)				
