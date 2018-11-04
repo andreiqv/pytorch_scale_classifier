@@ -40,9 +40,9 @@ dataset_sizes, class_names = data_factory.dataset_info(image_datasets)
 #print('classes:', class_names)
 #print('class_to_idx:', dataset.class_to_idx)
 
-for i, (x, y) in enumerate(dataloaders['valid']):
-	#print(x) # image
-	print(i, y) # image label
+#for i, (x, y) in enumerate(dataloaders['valid']):
+#	print(x) # image
+#	print(i, y) # image label
 
 
 def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
