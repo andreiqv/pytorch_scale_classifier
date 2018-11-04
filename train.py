@@ -34,6 +34,8 @@ dataloaders, image_datasets = data_factory.load_data(data_dir)
 data_parts = list(dataloaders.keys())
 dataset_sizes, class_names = data_factory.dataset_info(image_datasets)
 
+num_classes = len(class_names)
+
 #print(data_parts)
 #print('train size:', dataset_sizes['train'])
 #print('valid size:', dataset_sizes['valid'])
@@ -116,7 +118,7 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
 
 model_ft = models.resnet18(pretrained=True)
 num_ftrs = model_ft.fc.in_features
-model_ft.fc = nn.Linear(num_ftrs, 2)
+model_ft.fc = nn.Linear(num_ftrs, num_classes)
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 model_ft = model_ft.to(device)
