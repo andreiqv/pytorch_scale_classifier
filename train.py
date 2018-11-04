@@ -23,6 +23,8 @@ import os
 import sys
 import copy
 
+import progressbar
+
 import data_factory
 import settings
 data_dir = settings.data_dir 
@@ -35,6 +37,12 @@ dataloaders, image_datasets = data_factory.load_data(data_dir)
 dataset_sizes, class_names = data_factory.dataset_info(image_datasets)
 num_classes = len(class_names)
 data_parts = ['train', 'valid']
+
+num_batch = dict()
+num_batch['train'] = math.ceil(dataset_sizes['train'] / settings.batch_size)
+num_batch['valid'] = math.ceil(dataset_sizes['valid'] / settings.batch_size)
+print('train_num_batch:', num_batch['train'])
+print('valid_num_batch:', num_batch['valid'])
 
 #print(data_parts)
 #print('train size:', dataset_sizes['train'])
@@ -68,16 +76,15 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
 			running_loss = 0.0
 			running_corrects = 0
 
-			i = 0
+
+			bar = progressbar.ProgressBar(maxval=num_batch[phase]).start()
 
 			# Iterate over data.
-			for inputs, labels in dataloaders[phase]:
+			for i_batch, (inputs, labels) in enumerate(dataloaders[phase]):
 				inputs = inputs.to(device)
 				labels = labels.to(device)
 
-				os.system("printf '\033c'")	
-				print(i)
-				i += 1
+				bar.update(i_batch)
 
 				# zero the parameter gradients
 				optimizer.zero_grad()
@@ -97,6 +104,8 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
 				# statistics
 				running_loss += loss.item() * inputs.size(0)
 				running_corrects += torch.sum(preds == labels.data)
+
+			bar.finish()	
 
 			epoch_loss = running_loss / dataset_sizes[phase]
 			epoch_acc = running_corrects.double() / dataset_sizes[phase]
