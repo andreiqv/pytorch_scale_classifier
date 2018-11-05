@@ -132,7 +132,7 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
 
 
 				# statistics
-				acc1, acc6 = accuracy(outputs, labels, topk=(1, 2))
+				acc1, acc6 = accuracy(outputs, labels, topk=(1, settings.topk))
 				acc1_list.append(acc1)
 				acc6_list.append(acc6)
 				if not SHOW_BAR:
