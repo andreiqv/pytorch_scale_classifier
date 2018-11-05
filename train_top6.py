@@ -142,7 +142,6 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
 					print('match: ', int(torch.sum(preds == labels.data)))
 					print('top1={:.4f}, top6={:.4f}'.format(acc1.double(), acc6.double()))
 
-
 				running_loss += loss.item() * inputs.size(0)
 				running_corrects += torch.sum(preds == labels.data)				
 
