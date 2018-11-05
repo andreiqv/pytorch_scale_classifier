@@ -3,11 +3,11 @@ import sys
 import random
 
 
-src_dir = '/home/andrei/Data/Datasets/Scales/classifier_dataset_181018/'
-dst_dir = '/home/andrei/Data/Datasets/Scales/splited/'
+#src_dir = '/home/andrei/Data/Datasets/Scales/classifier_dataset_181018/'
+#dst_dir = '/home/andrei/Data/Datasets/Scales/splited/'
 
-#src_dir = '/w/WORK/ineru/06_scales/_dataset/copy/'
-#dst_dir = '/w/WORK/ineru/06_scales/_dataset/splited/'
+src_dir = '/w/WORK/ineru/06_scales/_dataset/copy/'
+dst_dir = '/w/WORK/ineru/06_scales/_dataset/splited/'
 parts = ['train', 'valid', 'test']
 
 
@@ -46,7 +46,7 @@ def copy_files_to_subdirs(src_dir, dst_dir, parts, ratio=[9,1,0]):
 		files['train'] = file_names[ : num_train]
 		files['valid'] = file_names[num_train : num_train + num_valid]
 		files['test']  = file_names[num_train + num_valid : ]
-		print('[{0}] - {1} - {}:{}:{}'.\
+		print('[{}] - {} - {}:{}:{}'.\
 			format(class_name, num_files, num_train, num_valid, num_test))
 		#print('train:valid:test = ', len(files['train']),\
 		#	len(files['valid']), len(files['test']))
