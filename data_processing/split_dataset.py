@@ -36,12 +36,12 @@ def copy_files_to_subdirs(src_dir, dst_dir, parts, ratio=[9,1,0]):
 		num_test  = num_files * ratio[2] // sum(ratio)
 		num_train = num_files - num_valid - num_test
 
-		min_num_train = 10
-		if num_train < min_num_train:
-			(num_train, num_valid, num_test) = (num_files, 0, 0)
+		#min_num_train = 10
+		#if num_train < min_num_train:
+		#	(num_train, num_valid, num_test) = (num_files, 0, 0)
 
-		#random.shuffle(file_names)
-		file_names.sort()
+		random.shuffle(file_names)
+		#file_names.sort()
 		files = dict()
 		files['train'] = file_names[ : num_train]
 		files['valid'] = file_names[num_train : num_train + num_valid]
@@ -64,5 +64,5 @@ def copy_files_to_subdirs(src_dir, dst_dir, parts, ratio=[9,1,0]):
 
 if __name__ == '__main__':
 
-	copy_files_to_subdirs(src_dir, dst_dir, parts, ratio=[9,1,0])
+	copy_files_to_subdirs(src_dir, dst_dir, parts, ratio=[7,3,0])
 
