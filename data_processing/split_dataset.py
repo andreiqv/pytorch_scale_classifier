@@ -3,11 +3,11 @@ import sys
 import random
 
 
-#src_dir = '/home/andrei/Data/Datasets/Scales/classifier_dataset_181018/'
-#dst_dir = '/home/andrei/Data/Datasets/Scales/splited/'
+src_dir = '/home/andrei/Data/Datasets/Scales/classifier_dataset_181018/'
+dst_dir = '/home/andrei/Data/Datasets/Scales/splited/'
 
-src_dir = '/w/WORK/ineru/06_scales/_dataset/copy/'
-dst_dir = '/w/WORK/ineru/06_scales/_dataset/splited/'
+#src_dir = '/w/WORK/ineru/06_scales/_dataset/copy/'
+#dst_dir = '/w/WORK/ineru/06_scales/_dataset/splited/'
 parts = ['train', 'valid', 'test']
 
 
