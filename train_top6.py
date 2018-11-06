@@ -97,7 +97,7 @@ def accuracy_topk(outputs, labels, k=1):
 	batch_size = len(outputs)
 	res = np.zeros(batch_size, dtype=int)
 	for i in range(batch_size):
-		output = outputs[i].detach().numpy()
+		output = outputs[i].detach().cpu().numpy()
 		label = int(labels[i])
 		#predict = np.argmax(output)
 		topk_predicts = set(output.argsort()[::-1][:k])
