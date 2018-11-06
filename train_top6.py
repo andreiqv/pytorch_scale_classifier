@@ -28,7 +28,9 @@ import sys
 import copy
 
 import progressbar
-SHOW_BAR = True
+SHOW_BAR = False
+DEBUG = True
+TOPk = 6
 
 import data_factory
 import settings
@@ -75,6 +77,35 @@ def accuracy(output, target, topk=(1,)):
         res.append(correct_k.mul_(1.0 / batch_size))
     
     return res
+
+
+def accuracy_top1(outputs, labels):
+
+	batch_size = len(outputs)
+	res = np.zeros(batch_size, dtype=int)
+	for i in range(batch_size):
+		output = outputs[i].detach().numpy()
+		label = int(labels[i])
+		predict = np.argmax(output)
+		res[i] = 1 if label==predict else 0
+		print('i={}: res={} (label={}, predict={})'.format(i, res[i], label, predict))
+	return np.mean(res)
+
+
+def accuracy_topk(outputs, labels, k=1):
+
+	batch_size = len(outputs)
+	res = np.zeros(batch_size, dtype=int)
+	for i in range(batch_size):
+		output = outputs[i].detach().numpy()
+		label = int(labels[i])
+		#predict = np.argmax(output)
+		topk_predicts = set(output.argsort()[::-1][:k])
+		res[i] = 1 if label in topk_predicts else 0
+		print('i={}: res={} (label={}, predicts={})'.format(i, res[i], label, topk_predicts))
+
+	return np.mean(res)
+
 
 
 def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
@@ -132,7 +163,17 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
 
 
 				# statistics
-				acc1, acc6 = accuracy(outputs, labels, topk=(1, 6))				
+				"""
+				if DEBUG: print('----------')
+				acc1, acc6 = accuracy(outputs, labels, topk=(1, TOPk))
+				acc1 = acc1.double()
+				acc6 = acc6.double()				
+				if DEBUG: print('accuracy(1): acc1={}, acc6={}'.format(acc1, acc6))
+				"""
+				acc1 = accuracy_top1(outputs, labels)
+				acc6 = accuracy_topk(outputs, labels, k=TOPk)
+				if DEBUG: print('-')
+				if DEBUG: print('accuracy(2): acc1={}, acc6={}'.format(acc1, acc6))
 
 				acc1_list.append(acc1)
 				acc6_list.append(acc6)
@@ -141,7 +182,7 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
 					#print('preds: ', preds)
 					#print('labels:', labels.data)
 					print('match: ', int(torch.sum(preds == labels.data)))
-					print('top1={:.4f}, top6={:.4f}'.format(acc1.double(), acc6.double()))
+					print('top1={:.4f}, top6={:.4f}'.format(acc1, acc6))
 
 				running_loss += loss.item() * inputs.size(0)
 				running_corrects += torch.sum(preds == labels.data)				

@@ -2,16 +2,17 @@ import os
 import sys
 import random
 
+if os.path.exists('.local'):
+	src_dir = '/w/WORK/ineru/06_scales/_dataset/copy/'
+	dst_dir = '/w/WORK/ineru/06_scales/_dataset/splited/'
+else:
+	src_dir = '/home/andrei/Data/Datasets/Scales/classifier_dataset_181018/'
+	dst_dir = '/home/andrei/Data/Datasets/Scales/splited/'
 
-src_dir = '/home/andrei/Data/Datasets/Scales/classifier_dataset_181018/'
-dst_dir = '/home/andrei/Data/Datasets/Scales/splited/'
-
-#src_dir = '/w/WORK/ineru/06_scales/_dataset/copy/'
-#dst_dir = '/w/WORK/ineru/06_scales/_dataset/splited/'
 parts = ['train', 'valid', 'test']
 
 
-def copy_files_to_subdirs(src_dir, dst_dir, parts, ratio=[9,1,0]):
+def copy_files_to_subdirs(src_dir, dst_dir, parts, ratio=[1,1,1]):
 
 	src_dir = src_dir.rstrip('/')
 	dst_dir = dst_dir.rstrip('/')
@@ -36,9 +37,10 @@ def copy_files_to_subdirs(src_dir, dst_dir, parts, ratio=[9,1,0]):
 		num_test  = num_files * ratio[2] // sum(ratio)
 		num_train = num_files - num_valid - num_test
 
-		#min_num_train = 10
-		#if num_train < min_num_train:
-		#	(num_train, num_valid, num_test) = (num_files, 0, 0)
+		min_num_train = 0  # if 0, then do nothing
+		if min_num_train > 0:
+			if num_train < min_num_train:
+				(num_train, num_valid, num_test) = (num_files, 0, 0)
 
 		random.shuffle(file_names)
 		#file_names.sort()
@@ -64,5 +66,5 @@ def copy_files_to_subdirs(src_dir, dst_dir, parts, ratio=[9,1,0]):
 
 if __name__ == '__main__':
 
-	copy_files_to_subdirs(src_dir, dst_dir, parts, ratio=[7,3,0])
+	copy_files_to_subdirs(src_dir, dst_dir, parts, ratio=[16,3,1])
 
