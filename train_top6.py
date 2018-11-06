@@ -28,8 +28,8 @@ import sys
 import copy
 
 import progressbar
-SHOW_BAR = False
-DEBUG = True
+SHOW_BAR = True
+DEBUG = False
 TOPk = 6
 
 import data_factory
