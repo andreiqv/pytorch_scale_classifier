@@ -88,7 +88,7 @@ def accuracy_top1(outputs, labels):
 		label = int(labels[i])
 		predict = np.argmax(output)
 		res[i] = 1 if label==predict else 0
-		print('i={}: res={} (label={}, predict={})'.format(i, res[i], label, predict))
+		if DEBUG: print('i={}: res={} (label={}, predict={})'.format(i, res[i], label, predict))
 	return np.mean(res)
 
 
@@ -102,7 +102,7 @@ def accuracy_topk(outputs, labels, k=1):
 		#predict = np.argmax(output)
 		topk_predicts = set(output.argsort()[::-1][:k])
 		res[i] = 1 if label in topk_predicts else 0
-		print('i={}: res={} (label={}, predicts={})'.format(i, res[i], label, topk_predicts))
+		if DEBUG: print('i={}: res={} (label={}, predicts={})'.format(i, res[i], label, topk_predicts))
 
 	return np.mean(res)
 
