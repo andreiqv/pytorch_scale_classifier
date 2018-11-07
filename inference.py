@@ -143,12 +143,12 @@ def model_testing(model, src_dir):
 			file_path = subdir + '/' + file_name
 
 			predict, topk_predicts = inference(model, file_path, k=3)
-			topk_classes = list(map(lambda idx: idx_to_class[idx], topk_predicts))
+			topk_predict_classes = list(map(lambda idx: idx_to_class[idx], topk_predicts))
 
 			predict_class = idx_to_class[predict]
 
-			res1 = 1 if predict_class==class_name else 0
-			res6 = 1 if predict_class in topk_classes else 0
+			res1 = 1 if predict_class == class_name else 0
+			res6 = 1 if class_name in topk_predict_classes else 0
 			res1_list.append(res1)
 			res6_list.append(res6)
 
