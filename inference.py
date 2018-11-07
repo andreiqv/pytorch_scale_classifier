@@ -65,9 +65,6 @@ print('idx_to_class:', idx_to_class)
 
 
 
-
-num_classes = 4
-
 model_ft = models.resnet18(pretrained=True)
 num_ftrs = model_ft.fc.in_features
 model_ft.fc = nn.Linear(num_ftrs, num_classes)
