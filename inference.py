@@ -89,6 +89,7 @@ def inference(model, img_file, k=1):
 	inputs = inputs.view(1, inputs.size(0), inputs.size(1), inputs.size(2))
 	
 	print('inputs.device:', inputs.device)
+	inputs = inputs.to(device)
 	outputs = model(inputs) # inference
 	
 	output = outputs[0].detach().cpu().numpy()
