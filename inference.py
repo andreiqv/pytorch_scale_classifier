@@ -96,16 +96,14 @@ def inference(model, img_file, k=1):
 
 
 
-
-img_file = 'images/31.jpg'
-class_name = '31'
-
-predict, topk_predicts = inference(model, img_file, k=3)
-topk_class_names = list(map(lambda idx: idx_to_class[idx], topk_predicts))
-
-print('predict: {} (idx={})'.format(idx_to_class[predict], predict))
-print('top-6:', topk_predicts)
-print('topk_class_names:', topk_class_names)
+if False:
+	img_file = 'images/31.jpg'
+	class_name = '31'
+	predict, topk_predicts = inference(model, img_file, k=3)
+	topk_class_names = list(map(lambda idx: idx_to_class[idx], topk_predicts))
+	print('predict: {} (idx={})'.format(idx_to_class[predict], predict))
+	print('top-6:', topk_predicts)
+	print('topk_class_names:', topk_class_names)
 
 #x = np.asarray(img)
 #x = torch.tensor(x)
