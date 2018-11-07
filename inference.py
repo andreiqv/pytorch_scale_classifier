@@ -69,15 +69,12 @@ model_ft = models.resnet18(pretrained=True)
 num_ftrs = model_ft.fc.in_features
 model_ft.fc = nn.Linear(num_ftrs, num_classes)
 
-#device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-device = torch.device("cpu")
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 model_ft = model_ft.to(device)
 model = model_ft
 
 model_path = 'mymodel.pt'
-#model.load_state_dict(torch.load(model_path))
-#model = torch.load(model_path, map_location=lambda storage, location: 'cpu')
-model = torch.load(model_path, map_location=lambda storage, loc: 'cpu')
+model.load_state_dict(torch.load(model_path))
 model.eval()
 
 
