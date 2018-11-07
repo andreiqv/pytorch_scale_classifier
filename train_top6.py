@@ -170,7 +170,9 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
 
 
 
-model_ft = models.resnet18(pretrained=True)
+#model_ft = models.resnet18(pretrained=True)
+model_ft = models.vgg19(pretrained=True)
+
 num_ftrs = model_ft.fc.in_features
 model_ft.fc = nn.Linear(num_ftrs, num_classes)
 
@@ -196,12 +198,17 @@ torch.save(model_ft.state_dict(), model_path)
 
 """
 ----------
- shuffle ratio=[16,3,1]
-100% |###################################################################################|
+1) shuffle ratio=[16,3,1]
 Epoch 9 [train]: loss=0.8937, acc=0.7310, top1=0.7310, top6=0.9594
-100% |###################################################################################|
 Epoch 9 [valid]: loss=0.6637, acc=0.7923, top1=0.7939, top6=0.9806
 Training complete in 20m 1s
 TEST RESULT: top1=0.8092, top6=0.9853
 
+
+2) sorted ratio=[16,3,1]
+Epoch 9 [train]: loss=0.8416, acc=0.7472, top1=0.7462, top6=0.9663
+Epoch 9 [valid]: loss=1.0635, acc=0.6884, top1=0.6870, top6=0.9349
+Training complete in 20m 14s
+Best val Acc: 0.690476
+TEST RESULT: top1=0.5291, top6=0.8550
 """

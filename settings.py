@@ -13,7 +13,7 @@ if os.path.exists('.local'):
 
 else:
 	#data_dir = '/home/andrei/Data/Datasets/Scales/splited/'
-	data_dir = '/home/andrei/Data/Datasets/Scales/splited/'
+	data_dir = '/home/andrei/Data/Datasets/Scales/splited_shuffle_[16,3,1]/'	
 	batch_size = 32
 	num_workers = 8	
 
