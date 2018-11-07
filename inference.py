@@ -75,7 +75,8 @@ model_ft = model_ft.to(device)
 model = model_ft
 
 model_path = 'mymodel.pt'
-model.load_state_dict(torch.load(model_path))
+#model.load_state_dict(torch.load(model_path))
+model = torch.load(model_path, map_location=lambda storage, location: 'cpu')
 model.eval()
 
 
