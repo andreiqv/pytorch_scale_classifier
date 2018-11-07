@@ -155,8 +155,9 @@ def model_testing(model, src_dir):
 			print(file_path)
 			print('[{}] -- class={}, predict={} (idx={})'.\
 				format(res1, class_name, predict_class, predict))
-			print('[{}] -- topk:{}  ({})'.\
-				format(res6, topk_classes, topk_predicts))
+			print('[{}] -- topk:{}'.format(res6, topk_classes))
+			#print('[{}] -- topk:{}  ({})'.\
+			#	format(res6, topk_classes, topk_predicts))
 
 	return np.mean(res1_list), np.mean(res6_list)
 
