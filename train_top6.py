@@ -188,7 +188,7 @@ optimizer_ft = optim.SGD(model_ft.parameters(), lr=0.0002, momentum=0.9)
 exp_lr_scheduler = lr_scheduler.StepLR(optimizer_ft, step_size=7, gamma=0.1)
 
 model_ft = train_model(model_ft, criterion, optimizer_ft, exp_lr_scheduler,
-	num_epochs=10)	
+	num_epochs=30)	
 
 # save model
 
