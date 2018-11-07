@@ -28,13 +28,14 @@ import sys
 import copy
 
 import progressbar
-SHOW_BAR = True
-DEBUG = False
-TOPk = 6
 
 import data_factory
 import settings
-data_dir = settings.data_dir 
+from settings import data_dir, TOPk, SHOW_BAR, DEBUG
+from accuracy import *
+#SHOW_BAR = True
+#DEBUG = False
+#TOPk = 6
 
 #root = '/home/andrei/Data/Datasets/Scales/classifier_dataset_181018/'
 #data_dir = '/w/WORK/ineru/06_scales/_dataset/splited/'
@@ -60,52 +61,6 @@ print('valid_num_batch:', num_batch['valid'])
 #for i, (x, y) in enumerate(dataloaders['valid']):
 #	print(x) # image
 #	print(i, y) # image label
-
-def accuracy(output, target, topk=(1,)):
-    """Computes the precision@k for the specified values of k"""
-    maxk = max(topk)
-    batch_size = target.size(0)
-
-    _, pred = output.topk(maxk, 1, True, True)
-    pred = pred.t()
-    correct = pred.eq(target.view(1, -1).expand_as(pred))
-
-    res = []
-    for k in topk:
-        correct_k = correct[:k].view(-1).float().sum(0)
-        #res.append(correct_k.mul_(100.0 / batch_size))
-        res.append(correct_k.mul_(1.0 / batch_size))
-    
-    return res
-
-
-def accuracy_top1(outputs, labels):
-
-	batch_size = len(outputs)
-	res = np.zeros(batch_size, dtype=int)
-	for i in range(batch_size):
-		output = outputs[i].detach().cpu().numpy()
-		label = int(labels[i])
-		predict = np.argmax(output)
-		res[i] = 1 if label==predict else 0
-		if DEBUG: print('i={}: res={} (label={}, predict={})'.format(i, res[i], label, predict))
-	return np.mean(res)
-
-
-def accuracy_topk(outputs, labels, k=1):
-
-	batch_size = len(outputs)
-	res = np.zeros(batch_size, dtype=int)
-	for i in range(batch_size):
-		output = outputs[i].detach().cpu().numpy()
-		label = int(labels[i])
-		#predict = np.argmax(output)
-		topk_predicts = set(output.argsort()[::-1][:k])
-		res[i] = 1 if label in topk_predicts else 0
-		if DEBUG: print('i={}: res={} (label={}, predicts={})'.format(i, res[i], label, topk_predicts))
-
-	return np.mean(res)
-
 
 
 def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
@@ -231,4 +186,10 @@ optimizer_ft = optim.SGD(model_ft.parameters(), lr=0.001, momentum=0.9)
 exp_lr_scheduler = lr_scheduler.StepLR(optimizer_ft, step_size=7, gamma=0.1)
 
 model_ft = train_model(model_ft, criterion, optimizer_ft, exp_lr_scheduler,
-	num_epochs=25)	
+	num_epochs=1)	
+
+# save model
+
+model_path = 'mymodel.pt'
+torch.save(model_ft.state_dict(), model_path)
+

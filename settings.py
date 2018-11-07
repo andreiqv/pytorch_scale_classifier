@@ -7,8 +7,15 @@ if os.path.exists('.local'):
 	num_workers = 4
 	topk = 2
 
+	SHOW_BAR = False
+	DEBUG = True
+	TOPk = 3
+
 else:
 	data_dir = '/home/andrei/Data/Datasets/Scales/splited/'
 	batch_size = 32
 	num_workers = 8	
-	topk = 6
+
+	SHOW_BAR = True
+	DEBUG = False
+	TOPk = 6
