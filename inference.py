@@ -142,7 +142,7 @@ def model_testing(model, src_dir):
 		for file_name in file_names:
 			file_path = subdir + '/' + file_name
 
-			predict, topk_predicts = inference(model, file_path, k=3)
+			predict, topk_predicts = inference(model, file_path, k=6)
 			topk_predict_classes = list(map(lambda idx: idx_to_class[idx], topk_predicts))
 
 			predict_class = idx_to_class[predict]
@@ -155,7 +155,7 @@ def model_testing(model, src_dir):
 			print(file_path)
 			print('[{}] -- class={}, predict={} (idx={})'.\
 				format(res1, class_name, predict_class, predict))
-			print('[{}] -- topk:{}'.format(res6, topk_classes))
+			print('[{}] -- topk:{}'.format(res6, topk_predict_classes))
 			#print('[{}] -- topk:{}  ({})'.\
 			#	format(res6, topk_classes, topk_predicts))
 
