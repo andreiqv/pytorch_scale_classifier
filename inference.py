@@ -87,7 +87,10 @@ def inference(model, img_file, k=1):
 	#inputs = Variable(img, volatile=True)
 	inputs = Variable(img, requires_grad=False)
 	inputs = inputs.view(1, inputs.size(0), inputs.size(1), inputs.size(2))
-	outputs = model(inputs)
+	
+	print('inputs.device:', inputs.device)
+	outputs = model(inputs) # inference
+	
 	output = outputs[0].detach().cpu().numpy()
 	print(output)
 	predict = np.argmax(output)
