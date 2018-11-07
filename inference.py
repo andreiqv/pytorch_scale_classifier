@@ -88,13 +88,11 @@ def inference(model, img_file, k=1):
 	inputs = Variable(img, requires_grad=False)
 	inputs = inputs.view(1, inputs.size(0), inputs.size(1), inputs.size(2))
 	
-	print('inputs.device:', inputs.device)
 	inputs = inputs.to(device)
-	print('inputs.device:', inputs.device)
 	outputs = model(inputs) # inference
 	
 	output = outputs[0].detach().cpu().numpy()
-	print(output)
+	#print(output)
 	predict = np.argmax(output)
 	topk_predicts = list(output.argsort()[::-1][:k])
 	return predict, topk_predicts
