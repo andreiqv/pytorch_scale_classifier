@@ -26,7 +26,7 @@ import copy
 
 import settings
 
-IMAGE_WIDTH = 299
+IMAGE_WIDTH = 224
 
 
 data_transforms = {
